@@ -28,7 +28,7 @@ public class TokenServiceImpl implements TokenService {
         //System.out.println(user.toString());
         long startTime = System.currentTimeMillis();
 
-        String shaKey = DigestUtils.sha256Hex(user.toString());
+        String shaKey = "Service1_" + DigestUtils.sha256Hex(user.toString());
 
         long endTime = System.currentTimeMillis();
         long executionTime = endTime - startTime;
@@ -37,10 +37,9 @@ public class TokenServiceImpl implements TokenService {
 
         System.out.println("Shakey " + shaKey);
 
-        String token = "Service1_" + UUID.randomUUID().toString().replace("-", "");
         try {
             if (redisService.exists(shaKey)) return (String) redisService.get(shaKey);
-            redisService.setKey(shaKey, token.toString(), 1000L);
+            redisService.setKey(shaKey, shaKey, 1000L);
             return shaKey;
         } catch (Exception e) {
 

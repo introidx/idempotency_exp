@@ -20,8 +20,8 @@ public class BusinessController {
 
     List<User> users = new ArrayList<>();
 
-    @GetMapping("/get/token")
-    public ResponseEntity<String> getToken(@RequestBody User user){
+    @GetMapping("/get/key")
+    public ResponseEntity<String> getKey(@RequestBody User user){
         String token = tokenService.createToken(user);
         return new ResponseEntity<>(token, HttpStatus.OK);
     }
